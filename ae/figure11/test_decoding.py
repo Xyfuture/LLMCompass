@@ -41,7 +41,7 @@ def simulate_latency(system, bs, seq_len, name, lock):
     with lock:
         with open(f"ae/figure11/{name}.csv", "a") as f:
             f.write(
-                f"{bs}, {seq_len}, {auto_regression_latency_simulated}, {model_auto_regression.simluate_log}\n"
+                f"{bs}, {seq_len}, {auto_regression_latency_simulated}, {model_auto_regression.simulate_log}\n"
             )
 
 

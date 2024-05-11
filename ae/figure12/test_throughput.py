@@ -48,7 +48,7 @@ def simulate_decoding_latency(system, bs, seq_len, name, lock, heuristics):
     with lock:
         with open(f"ae/figure12/{name}_decoding.csv", "a") as f:
             f.write(
-                f"{bs}, {seq_len}, {auto_regression_latency_simulated}, {model_auto_regression.simluate_log}\n"
+                f"{bs}, {seq_len}, {auto_regression_latency_simulated}, {model_auto_regression.simulate_log}\n"
             )
 
 
@@ -65,7 +65,7 @@ def simulate_prefill_latency(system, bs, seq_len, name, lock, heuristics):
     latency_simulated = model.compile_and_simulate(system, heuristics)
     with lock:
         with open(f"ae/figure12/{name}_prefill.csv", "a") as f:
-            f.write(f"{bs}, {seq_len}, {latency_simulated}, {model.simluate_log}\n")
+            f.write(f"{bs}, {seq_len}, {latency_simulated}, {model.simulate_log}\n")
 
 
 lock_our_prefill = Lock()

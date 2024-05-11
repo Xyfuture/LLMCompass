@@ -51,11 +51,11 @@ def test_SRAM_KB(SRAM_KB, lock):
     with lock:
         with open(f"ae/figure9/l1_cache_results_init.csv", "a") as f:
             f.write(
-                f"{SRAM_KB}, {compute_area_mm2+io_area_mm2}, {init_latency_simulated}, {model_init.simluate_log}\n"
+                f"{SRAM_KB}, {compute_area_mm2+io_area_mm2}, {init_latency_simulated}, {model_init.simulate_log}\n"
             )
         with open(f"ae/figure9/l1_cache_results_ar.csv", "a") as f:
             f.write(
-                f"{SRAM_KB}, {compute_area_mm2+io_area_mm2}, {auto_regression_latency_simulated}, {model_auto_regression.simluate_log}\n"
+                f"{SRAM_KB}, {compute_area_mm2+io_area_mm2}, {auto_regression_latency_simulated}, {model_auto_regression.simulate_log}\n"
             )
 
 

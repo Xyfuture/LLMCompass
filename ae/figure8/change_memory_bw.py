@@ -70,11 +70,11 @@ def test_memory_bandwidth(memory_bandwidth, lock):
     with lock:
         with open(f"ae/figure8/memory_bw_results_bs{batch_size}_init.csv", "a") as f:
             f.write(
-                f"{memory_bandwidth*400}, {compute_area_mm2+io_area_mm2}, {init_latency_simulated}, {model_init.simluate_log}\n"
+                f"{memory_bandwidth*400}, {compute_area_mm2+io_area_mm2}, {init_latency_simulated}, {model_init.simulate_log}\n"
             )
         with open(f"ae/figure8/memory_bw_results_bs{batch_size}_ar.csv", "a") as f:
             f.write(
-                f"{memory_bandwidth*400}, {compute_area_mm2+io_area_mm2}, {auto_regression_latency_simulated}, {model_auto_regression.simluate_log}\n"
+                f"{memory_bandwidth*400}, {compute_area_mm2+io_area_mm2}, {auto_regression_latency_simulated}, {model_auto_regression.simulate_log}\n"
             )
 
 

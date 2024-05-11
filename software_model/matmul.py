@@ -746,8 +746,10 @@ class Matmul(Operator):
         pcb_module: Device,
     ) -> int:
         if self.look_up_table is None:
+            cur_dir_name = os.path.dirname(os.path.realpath(__file__))
+            repo_dir_name = os.path.dirname(cur_dir_name)
             self.look_up_table = pd.read_csv(
-                f"./systolic_array_model/look_up_table_{pcb_module.compute_module.core.systolic_array.array_height}_{pcb_module.compute_module.core.systolic_array.array_width}.csv",
+                f"{repo_dir_name}/systolic_array_model/look_up_table_{pcb_module.compute_module.core.systolic_array.array_height}_{pcb_module.compute_module.core.systolic_array.array_width}.csv",
                 header=None,
                 names=[
                     "M",

@@ -280,7 +280,12 @@ class TransformerBlockInitComputationTP(Operator):
             + gelu_latency
             + allreduce_total_latency
         )
-        self.simluate_log = f"{qkv_latency}, {q_mul_k_latency}, {a_mul_v_latency}, {h_matmul0_latency}, {h1_matmul1_latency}, {h2_matmul2_latency}, {softmax_latency}, {layernorm_latency}, {layernorm_latency}, {gelu_latency}, {allreduce_latency}, {allreduce_latency}"
+        self.simulate_log = f"{qkv_latency}, {q_mul_k_latency}, {a_mul_v_latency}, {h_matmul0_latency}, {h1_matmul1_latency}, {h2_matmul2_latency}, {softmax_latency}, {layernorm_latency}, {layernorm_latency}, {gelu_latency}, {allreduce_latency}, {allreduce_latency}"
+        self.simulate_dict  = {
+            'qkv': qkv_latency,'q_mul_k':q_mul_k_latency,'a_mul_v':a_mul_v_latency,
+            'h_matmul0':h_matmul0_latency,'h1_matmul1':h1_matmul1_latency,'h2_matmul2':h2_matmul2_latency,
+            'softmax':softmax_latency,'layer_norm':layernorm_latency*2,'gelu':gelu_latency,'allreduce':allreduce_latency*2
+        }
         return self.latency
 
     def run_on_gpu(self):
@@ -636,7 +641,12 @@ class TransformerBlockAutoRegressionTP(Operator):
             + gelu_latency
             + allreduce_total_latency
         )
-        self.simluate_log = f"{qkv_latency}, {q_mul_k_latency}, {a_mul_v_latency}, {h_matmul0_latency}, {h1_matmul1_latency}, {h2_matmul2_latency}, {softmax_latency}, {layernorm_latency}, {layernorm_latency}, {gelu_latency}, {allreduce_latency}, {allreduce_latency}"
+        self.simulate_log = f"{qkv_latency}, {q_mul_k_latency}, {a_mul_v_latency}, {h_matmul0_latency}, {h1_matmul1_latency}, {h2_matmul2_latency}, {softmax_latency}, {layernorm_latency}, {layernorm_latency}, {gelu_latency}, {allreduce_latency}, {allreduce_latency}"
+        self.simulate_dict  = {
+            'qkv': qkv_latency,'q_mul_k':q_mul_k_latency,'a_mul_v':a_mul_v_latency,
+            'h_matmul0':h_matmul0_latency,'h1_matmul1':h1_matmul1_latency,'h2_matmul2':h2_matmul2_latency,
+            'softmax':softmax_latency,'layer_norm':layernorm_latency*2,'gelu':gelu_latency,'allreduce':allreduce_latency*2
+        }
         return self.latency
 
     def run_on_gpu(self):

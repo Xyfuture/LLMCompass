@@ -113,4 +113,4 @@ if __name__ == "__main__":
         if args.roofline:
             f.write(model.roofline_log)
         else:
-            f.write(model.simluate_log)
+            f.write(model.simulate_log)

@@ -81,11 +81,11 @@ def test_core_size(core_configs, lock):
     with lock:
         with open(f"ae/figure7/core_size_results_init.csv", "a") as f:
             f.write(
-                f"{name}, {compute_area_mm2+io_area_mm2}, {init_latency_simulated}, {model_init.simluate_log}\n"
+                f"{name}, {compute_area_mm2+io_area_mm2}, {init_latency_simulated}, {model_init.simulate_log}\n"
             )
         with open(f"ae/figure7/core_size_results_ar.csv", "a") as f:
             f.write(
-                f"{name}, {compute_area_mm2+io_area_mm2}, {auto_regression_latency_simulated}, {model_auto_regression.simluate_log}\n"
+                f"{name}, {compute_area_mm2+io_area_mm2}, {auto_regression_latency_simulated}, {model_auto_regression.simulate_log}\n"
             )
 
 
