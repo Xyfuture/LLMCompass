@@ -27,6 +27,7 @@ class LinkModule:
 
 link_module_dict = {
     "NVLinkV3": LinkModule(25e9, 50e9, 8.92e-6, 16, 256, 16),
+    # "NVLinkV3": LinkModule(10e9, 20e9, 8.92e-6, 16, 256, 16),
     "TPUv3Link": LinkModule(81.25e9 / 2, 81.25e9, 150e-6, 16, 256, 16),
 }
 # we cannot find a way to measure TPU p2p latency, we also don't know TPU packet format

@@ -1,26 +1,24 @@
-from software_model.transformer import (
-    TransformerBlockInitComputationTP,
-    TransformerBlockAutoRegressionTP,
-)
+from software_model.llama import LlamaTransformerBlockTP,ModelArgs
 from software_model.utils import data_type_dict, Tensor
 from hardware_model.system import system_dict
 import argparse
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--init", action="store_true", help="initial computation",default=True)
+    parser.add_argument("--init", action="store_true", help="initial computation",default=False)
     args = parser.parse_args()
 
     bs = 128
-    s = 1
-    output_token_length = 0
+    s = 1024
+    output_token_length = 2048
+
+    model_args = ModelArgs()
 
     if args.init:
         print("Initial computation")
 
-        model = TransformerBlockInitComputationTP(
-            d_model=12288,
-            n_heads=96,
+        model = LlamaTransformerBlockTP(
+            model_args=model_args,
             device_count=4,
             data_type=data_type_dict["fp16"],
         )
@@ -28,27 +26,26 @@ if __name__ == "__main__":
         # from design_space_exploration.dse import read_architecture_template, template_to_system
         # arch_specs = read_architecture_template("configs/template.json")
         # A100_system = template_to_system(arch_specs)
-        _ = model(Tensor([bs, s, 12288], data_type_dict["fp16"]))
+        _ = model(Tensor([bs, s, model_args.dim], data_type_dict["fp16"]),0)
 
         model.compile_and_simulate(A100_system, compile_mode="heuristic-GPU")
-        file_name = "transformer_A100_sim.csv"
+        file_name = "llama_init_A100_sim.csv"
     else:
         print("Auto-regression")
 
-        model = TransformerBlockAutoRegressionTP(
-            d_model=12288,
-            n_heads=96,
+        model = LlamaTransformerBlockTP(
+            model_args = model_args,
             device_count=4,
             data_type=data_type_dict["fp16"],
         )
 
         A100_system = system_dict["A100_4_fp16"]
         _ = model(
-            Tensor([bs, 1, 12288], data_type_dict["fp16"]), s + output_token_length
+            Tensor([bs, 1, model_args.dim], data_type_dict["fp16"]), s+output_token_length
         )
 
         model.compile_and_simulate(A100_system, compile_mode="heuristic-GPU")
-        file_name = "transformerAR_A100_sim.csv"
+        file_name = "llama_decode_A100_sim.csv"
 
     simulate_dict = model.simulate_dict
     simulate_beakdown = {}
@@ -67,3 +64,4 @@ if __name__ == "__main__":
 
     with open(f"./{file_name}", "w") as f:
         f.write(model.simulate_log)
+

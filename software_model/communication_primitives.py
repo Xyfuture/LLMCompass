@@ -27,7 +27,7 @@ class AllReduceMultiPCB(CommunicationPrimitive):
         self.input_shape = tensor.shape
         return tensor
 
-    def simulate(self, interconnect_module: InterConnectModule) -> None:
+    def simulate(self, interconnect_module: InterConnectModule) -> int:
         device_count = interconnect_module.device_count
         link_bandwidth_per_direction = (
             interconnect_module.link_module.bandwidth_per_direction
